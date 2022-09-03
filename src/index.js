@@ -175,13 +175,13 @@ app.get("/getUsers", (req, res) => {
 app.post("/getRide", (req, res) => {
   VehiculUse.findOne({
     where: {
-      user_id: req.body.userId,
+      user_id: req.body.user_id,
       startTime: req.body.startTime,
       vehicul: req.body.vehicul,
     },
   })
-    .then((users) => {
-      res.json(users);
+    .then((user) => {
+      res.json(user);
     })
     .catch((err) => {
       res.json(err);
