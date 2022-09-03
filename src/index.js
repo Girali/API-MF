@@ -161,6 +161,33 @@ app.get("/getVehiculsByVehicul:vehicul", (req, res) => {
     });
 });
 
+app.get("/getUsers", (req, res) => {
+  User.findAll({
+  })
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+app.post("/getRide", (req, res) => {
+  VehiculUse.findOne({
+    where: {
+      user_id: req.body.userId,
+      startTime: req.body.startTime,
+      vehicul: req.body.vehicul,
+    },
+  })
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 app.delete("/delete:id", (req, res) => {
   User.destroy({
     where: {
