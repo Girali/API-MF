@@ -74,7 +74,7 @@ app.post("/createUser", (req, res) => {
     });
 });
 
-app.post("/userStart", (req, res) => {
+app.put("/userStart", (req, res) => {
   User.update(req.body, {
     where: {
       id: req.body.id,
@@ -105,7 +105,7 @@ app.post("/createVehiculUse", (req, res) => {
     });
 });
 
-app.post("/stopVehiculUse", (req, res) => {
+app.put("/stopVehiculUse", (req, res) => {
   VehiculUse.update(req.body, {
     where: {
       id: req.body.id,
@@ -119,7 +119,7 @@ app.post("/stopVehiculUse", (req, res) => {
     });
 });
 
-app.post("/userStop", (req, res) => {
+app.put("/userStop", (req, res) => {
   User.update(req.body, {
     where: {
       id: req.body.id,
