@@ -27,13 +27,13 @@ const User = sequelize.define("User", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
   vehicul: Sequelize.INTEGER,
-  timeStart: Sequelize.INTEGER,
+  timeStart: Sequelize.BIGINT,
 });
 
 const VehiculUse = sequelize.define("VehiculUse", {
   user_id: Sequelize.INTEGER,
-  startTime: Sequelize.INTEGER,
-  stopTime: Sequelize.INTEGER,
+  startTime: Sequelize.BIGINT,
+  stopTime: Sequelize.BIGINT,
   state: Sequelize.BOOLEAN,
   comment: Sequelize.STRING,
   vehicul: Sequelize.INTEGER,
@@ -43,7 +43,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(auth);
 
-app.get("/connectUser", (req, res) => {
+app.post("/connectUser", (req, res) => {
   User.findOne({
     where: {
       name: req.body.name,
@@ -74,14 +74,14 @@ app.post("/createUser", (req, res) => {
     });
 });
 
-app.put("/userStart", (req, res) => {
+app.post("/userStart", (req, res) => {
   User.update(req.body, {
     where: {
       id: req.body.id,
     },
   })
     .then((user) => {
-      res.json(user);
+      res.send(req.body);
     })
     .catch((err) => {
       res.json(err);
@@ -105,7 +105,7 @@ app.post("/createVehiculUse", (req, res) => {
     });
 });
 
-app.put("/stopVehiculUse", (req, res) => {
+app.post("/stopVehiculUse", (req, res) => {
   VehiculUse.update(req.body, {
     where: {
       id: req.body.id,
@@ -119,14 +119,14 @@ app.put("/stopVehiculUse", (req, res) => {
     });
 });
 
-app.put("/userStop", (req, res) => {
+app.post("/userStop", (req, res) => {
   User.update(req.body, {
     where: {
       id: req.body.id,
     },
   })
     .then((user) => {
-      res.json(user);
+      res.send(req.body);
     })
     .catch((err) => {
       res.json(err);
